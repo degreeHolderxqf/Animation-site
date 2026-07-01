@@ -1,0 +1,132 @@
+{% comment %} Animated Slider Section
+  - Supports blocks of type "slide" with image, title, text, thumbnail
+  - Includes accessible markup and data attributes for JS
+{% endcomment %}
+
+<section class="animated-slider" data-autoplay-duration="{{ section.settings.autoplay_duration }}">
+  <div class="animated-slider__inner">
+    <div class="animated-slider__text{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+      <h2 class="animated-slider__title">{{ section.settings.heading }}</h2>
+      <p class="animated-slider__description">{{ section.settings.subheading }}</p>
+    </div>
+
+    <div class="animated-slider__carousel" role="region" aria-label="Featured slides">
+      <!-- Swiper + GSAP split-reveal structure -->
+      <div class="swiper animated-slider-swiper" data-autoplay-duration="{{ section.settings.autoplay_duration }}">
+        <div class="swiper-wrapper">
+          {% for block in section.blocks %}
+            {% if block.type == 'slide' %}
+              <div class="swiper-slide animated-slider__slide" data-index="{{ forloop.index0 }}" data-thumb-src="{{ block.settings.thumbnail | img_url: '200x' }}" data-image-src="{{ block.settings.image | img_url: '2048x' }}">
+                <div class="slide-under">
+                  {% if block.settings.slide_link != blank %}
+                    <a href="{{ block.settings.slide_link }}">
+                      <img src="{{ block.settings.image | img_url: '2048x' }}" alt="{{ block.settings.image_alt }}">
+                    </a>
+                  {% else %}
+                    <img src="{{ block.settings.image | img_url: '2048x' }}" alt="{{ block.settings.image_alt }}">
+                  {% endif %}
+                </div>
+
+                <div class="split top">
+                  {% if block.settings.slide_link != blank %}
+                    <a href="{{ block.settings.slide_link }}"><img src="{{ block.settings.image | img_url: '2048x' }}" alt="{{ block.settings.image_alt }}"></a>
+                  {% else %}
+                    <img src="{{ block.settings.image | img_url: '2048x' }}" alt="{{ block.settings.image_alt }}">
+                  {% endif %}
+                </div>
+
+                <div class="split bottom">
+                  {% if block.settings.slide_link != blank %}
+                    <a href="{{ block.settings.slide_link }}"><img src="{{ block.settings.image | img_url: '2048x' }}" alt="{{ block.settings.image_alt }}"></a>
+                  {% else %}
+                    <img src="{{ block.settings.image | img_url: '2048x' }}" alt="{{ block.settings.image_alt }}">
+                  {% endif %}
+                </div>
+
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+        <div class="swiper-button-prev animated-slider__prev" aria-label="Previous slide"></div>
+        <div class="swiper-button-next animated-slider__next" aria-label="Next slide"></div>
+      </div>
+
+      <!-- Left square autoplay progress showing next slide thumbnail -->
+      <div class="animated-slider__meta" aria-hidden="false">
+        <button class="autoplay-progress" aria-label="Next slide" type="button">
+          <svg viewBox="0 0 80 80" class="autoplay-progress__svg" aria-hidden="true">
+            <path class="autoplay-progress__bg" d="M 40,2 L 78,2 L 78,78 L 2,78 L 2,2 Z" />
+            <path class="autoplay-progress__path" d="M 40,2 L 78,2 L 78,78 L 2,78 L 2,2 Z" />
+          </svg>
+          <div class="autoplay-progress__thumb">
+            {%- assign slide_blocks = section.blocks | where: "type", "slide" -%}
+            {%- assign next_slide_index = 1 -%}
+            {%- if slide_blocks.size <= 1 -%}
+              {%- assign next_slide_index = 0 -%}
+            {%- endif -%}
+            {%- assign next_block = slide_blocks[next_slide_index] -%}
+            <img class="autoplay-progress__img" src="{{ next_block.settings.thumbnail | img_url: '200x' }}" alt="Next slide thumbnail">
+            <span class="autoplay-progress__label">Next</span>
+          </div>
+        </button>
+
+        <div class="animated-slider__count" aria-hidden="true">
+          <span class="animated-slider__current">01</span>
+          <span class="animated-slider__count-sep"></span>
+          <span class="animated-slider__total">0{{ section.blocks | size }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {{ 'animated-slider.css' | asset_url | stylesheet_tag }}
+  {{ 'animated-slider.js' | asset_url | script_tag }}
+
+{% schema %}
+{
+  "name": "Animated Slider",
+  "settings": [
+    {"type":"text","id":"heading","label":"Heading","default":"Featured"},
+    {"type":"textarea","id":"subheading","label":"Subheading","default":"A short description goes here."},
+    {
+      "type": "select",
+      "id": "autoplay_duration",
+      "label": "Autoplay duration",
+      "default": "10000",
+      "options": [
+        {
+          "value": "5000",
+          "label": "5 seconds"
+        },
+        {
+          "value": "10000",
+          "label": "10 seconds"
+        },
+        {
+          "value": "15000",
+          "label": "15 seconds"
+        },
+        {
+          "value": "20000",
+          "label": "20 seconds"
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {"type":"image_picker","id":"image","label":"Image"},
+        {"type":"text","id":"image_alt","label":"Image alt text","default":"slide"},
+        {"type":"text","id":"caption","label":"Caption","default":"slide image"},
+        {"type":"image_picker","id":"thumbnail","label":"Thumbnail (small image)"},
+        {"type":"url","id":"slide_link","label":"Link (optional)"}
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [{"name":"Animated Slider","category":"Hero"}]
+}
+{% endschema %}
