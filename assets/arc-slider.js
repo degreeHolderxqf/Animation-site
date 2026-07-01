@@ -112,16 +112,32 @@ function initArcSlider(section) {
       const description = activeCard.dataset.description || "";
 
       if (lastActiveIndex !== -1) {
-        gsap.timeline()
-          .to([activeCaption, activeTitle, activeDescription], { duration: 0.15, opacity: 0, y: -8, ease: "power1.in", stagger: 0.05 })
-          .call(() => {
+        const detailsContainer = activeCaption.closest(".arc-slider__active-details");
+        if (detailsContainer) {
+          // Trigger slide-up exit and fade-out animation by adding exit class
+          detailsContainer.classList.remove("active");
+          detailsContainer.classList.add("exit");
+
+          // After exit completes (250ms), update content and trigger reveal
+          setTimeout(() => {
+            // Disable transitions temporarily to reset the new text position to the bottom instantly
+            detailsContainer.classList.add("no-transition");
+            detailsContainer.classList.remove("exit");
+
+            // Update text content
             activeCaption.textContent = caption;
             activeTitle.textContent = title;
             activeDescription.textContent = description;
-          })
-          .to([activeCaption, activeTitle, activeDescription], { duration: 0.25, opacity: 1, y: 0, ease: "power1.out", stagger: 0.05 });
+
+            detailsContainer.offsetHeight; // trigger browser reflow
+
+            // Re-enable transitions and trigger slide up + fade in
+            detailsContainer.classList.remove("no-transition");
+            detailsContainer.classList.add("active");
+          }, 250);
+        }
       } else {
-        // Initial load (no fade transition needed)
+        // Initial load (no fade transition needed, elements already have active class)
         activeCaption.textContent = caption;
         activeTitle.textContent = title;
         activeDescription.textContent = description;

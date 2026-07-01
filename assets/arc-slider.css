@@ -280,3 +280,39 @@
     height: 44px;
   }
 }
+
+/* Reusable custom mask reveal animation classes */
+.custom-reveal-mask {
+  overflow: hidden;
+  display: block;
+}
+
+.custom-reveal-item {
+  display: block;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: opacity, transform;
+}
+
+/* State 1: Active (visible in center) */
+.active .custom-reveal-item,
+.active.custom-reveal-item {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* State 2: Exiting (sliding upwards and fading out) */
+.exit .custom-reveal-item {
+  opacity: 0;
+  transform: translateY(-30px);
+  /* Exit fast without staggered delay */
+  transition: opacity 0.25s ease-in, transform 0.25s ease-in;
+  transition-delay: 0ms !important;
+}
+
+/* Utility to disable transitions for instant position resets */
+.no-transition,
+.no-transition .custom-reveal-item {
+  transition: none !important;
+}

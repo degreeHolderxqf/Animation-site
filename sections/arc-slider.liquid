@@ -56,27 +56,17 @@
         </div>
       </div>
       <!-- Static detail container positioned absolutely below the center card -->
-      <div class="arc-slider__active-details scroll-trigger animate--fade-in">
-        <p class="arc-slider__active-caption"></p>
-        <h3 class="arc-slider__active-title"></h3>
-        <p class="arc-slider__active-description"></p>
+      <div class="arc-slider__active-details active">
+        <div class="custom-reveal-mask">
+          <p class="arc-slider__active-caption custom-reveal-item" style="transition-delay: 0ms;"></p>
+        </div>
+        <div class="custom-reveal-mask">
+          <h3 class="arc-slider__active-title custom-reveal-item" style="transition-delay: 80ms;"></h3 >
+        </div>
+        <div class="custom-reveal-mask">
+          <p class="arc-slider__active-description custom-reveal-item" style="transition-delay: 160ms;"></p>
+        </div>
       </div>
-    </div>
-
-    <!-- Navigation Arrows -->
-    <div class="arc-slider__nav">
-      <button type="button" class="arc-slider__nav-btn arc-slider__nav-btn--prev" aria-label="Previous slide" id="ArcSliderPrev-{{ section.id }}">
-        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="19" y1="12" x2="5" y2="12"></line>
-          <polyline points="12 19 5 12 12 5"></polyline>
-        </svg>
-      </button>
-      <button type="button" class="arc-slider__nav-btn arc-slider__nav-btn--next" aria-label="Next slide" id="ArcSliderNext-{{ section.id }}">
-        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="5" y1="12" x2="19" y2="12"></line>
-          <polyline points="12 5 19 12 12 19"></polyline>
-        </svg>
-      </button>
     </div>
   </div>
 </div>

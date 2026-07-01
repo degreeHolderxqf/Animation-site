@@ -5,9 +5,9 @@
 
 <section class="animated-slider" data-autoplay-duration="{{ section.settings.autoplay_duration }}">
   <div class="animated-slider__inner">
-    <div class="animated-slider__text{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-      <h2 class="animated-slider__title">{{ section.settings.heading }}</h2>
-      <p class="animated-slider__description">{{ section.settings.subheading }}</p>
+    <div class="animated-slider__text">
+      <p class="animated-slider__description" data-aos="fade-up" data-aos-delay="100">{{ section.settings.subheading }}</p>
+      <h2 class="animated-slider__title" data-aos="fade-up" data-aos-delay="0">{{ section.settings.heading }}</h2>
     </div>
 
     <div class="animated-slider__carousel" role="region" aria-label="Featured slides">
