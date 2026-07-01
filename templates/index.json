@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "pagetify-page": {
@@ -11,33 +20,13 @@
     "animated_slider_eF94yr": {
       "type": "animated-slider",
       "blocks": {
-        "slide_mnN4Fd": {
+        "slide_FEJAB3": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/soft-pink-cushioned-armchair-in-stately-salon_925x_05544313-d243-4510-90dc-7f23e311dda8.jpg",
+            "image": "shopify://shop_images/3255738d8e0a4f8b807a5a6235350d3b78539454.jpg",
             "image_alt": "slide",
             "caption": "slide image",
-            "thumbnail": "shopify://shop_images/soft-pink-cushioned-armchair-in-stately-salon_925x_05544313-d243-4510-90dc-7f23e311dda8.jpg",
-            "slide_link": ""
-          }
-        },
-        "slide_D4YwaC": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/house-plant-in-white-pot_925x_3319f44b-dd21-42bd-93d9-f24add3550f4.jpg",
-            "image_alt": "slide",
-            "caption": "slide image",
-            "thumbnail": "shopify://shop_images/house-plant-in-white-pot_925x_3319f44b-dd21-42bd-93d9-f24add3550f4.jpg",
-            "slide_link": ""
-          }
-        },
-        "slide_GFgKX9": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/spring-gardening-set-up_925x_9b40bc06-672c-4dc4-a64e-1de730ea5227.jpg",
-            "image_alt": "slide",
-            "caption": "slide image",
-            "thumbnail": "shopify://shop_images/spring-gardening-set-up_925x_9b40bc06-672c-4dc4-a64e-1de730ea5227.jpg",
+            "thumbnail": "shopify://shop_images/3255738d8e0a4f8b807a5a6235350d3b78539454.jpg",
             "slide_link": ""
           }
         },
@@ -50,19 +39,108 @@
             "thumbnail": "shopify://shop_images/flowers-in-yellow-watering-can_925x_3f76767f-5a01-4eec-ab5d-40210007a9f2.jpg",
             "slide_link": ""
           }
+        },
+        "slide_xCLae7": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/3255738d8e0a4f8b807a5a6235350d3b78539454.jpg",
+            "image_alt": "slide",
+            "caption": "slide image",
+            "thumbnail": "shopify://shop_images/3255738d8e0a4f8b807a5a6235350d3b78539454.jpg",
+            "slide_link": ""
+          }
+        },
+        "slide_gNkERh": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/flowers-in-yellow-watering-can_925x_3f76767f-5a01-4eec-ab5d-40210007a9f2.jpg",
+            "image_alt": "slide",
+            "caption": "slide image",
+            "thumbnail": "shopify://shop_images/flowers-in-yellow-watering-can_925x_3f76767f-5a01-4eec-ab5d-40210007a9f2.jpg",
+            "slide_link": ""
+          }
+        },
+        "slide_mnN4Fd": {
+          "type": "slide",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/soft-pink-cushioned-armchair-in-stately-salon_925x_05544313-d243-4510-90dc-7f23e311dda8.jpg",
+            "image_alt": "slide",
+            "caption": "slide image",
+            "thumbnail": "shopify://shop_images/soft-pink-cushioned-armchair-in-stately-salon_925x_05544313-d243-4510-90dc-7f23e311dda8.jpg",
+            "slide_link": ""
+          }
+        },
+        "slide_D4YwaC": {
+          "type": "slide",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/bright-hotel-room-bed_925x_1a2f6ba6-2900-40aa-b573-9d96b39aa047.jpg",
+            "image_alt": "slide",
+            "caption": "slide image",
+            "thumbnail": "shopify://shop_images/bright-hotel-room-bed_925x_1a2f6ba6-2900-40aa-b573-9d96b39aa047.jpg",
+            "slide_link": ""
+          }
+        },
+        "slide_GFgKX9": {
+          "type": "slide",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/spring-gardening-set-up_925x_9b40bc06-672c-4dc4-a64e-1de730ea5227.jpg",
+            "image_alt": "slide",
+            "caption": "slide image",
+            "thumbnail": "shopify://shop_images/spring-gardening-set-up_925x_9b40bc06-672c-4dc4-a64e-1de730ea5227.jpg",
+            "slide_link": ""
+          }
         }
       },
       "block_order": [
+        "slide_FEJAB3",
+        "slide_UrrKNE",
+        "slide_xCLae7",
+        "slide_gNkERh",
         "slide_mnN4Fd",
         "slide_D4YwaC",
-        "slide_GFgKX9",
-        "slide_UrrKNE"
+        "slide_GFgKX9"
       ],
       "name": "Animated Slider",
       "settings": {
-        "heading": "Featured",
-        "subheading": "A short description goes here.",
+        "heading": "From our Farms to your hands",
+        "subheading": "Welcome To TenTwenty Farms",
         "autoplay_duration": "10000"
+      }
+    },
+    "rich_text_f7cUjh": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_Ngwhyg": {
+          "type": "heading",
+          "settings": {
+            "heading": "Quality Products",
+            "heading_size": "h1"
+          }
+        },
+        "caption_GD3hxE": {
+          "type": "caption",
+          "settings": {
+            "caption": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+            "text_style": "subtitle",
+            "text_size": "medium"
+          }
+        }
+      },
+      "block_order": [
+        "heading_Ngwhyg",
+        "caption_GD3hxE"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": false,
+        "padding_top": 96,
+        "padding_bottom": 0
       }
     },
     "arc_slider_766109": {
@@ -72,54 +150,80 @@
           "type": "slide",
           "settings": {
             "image": "shopify://shop_images/soft-pink-cushioned-armchair-in-stately-salon_925x_05544313-d243-4510-90dc-7f23e311dda8.jpg",
-            "caption": "Started in 2017",
-            "title": "Uhuru",
-            "description": "There's always something happening at Flower Exchange! New products"
+            "caption": "",
+            "title": "Client 1",
+            "description": "Dubai, United Arab Emirates",
+            "link": ""
           }
         },
         "slide_2": {
           "type": "slide",
           "settings": {
             "image": "shopify://shop_images/house-plant-in-white-pot_925x_3319f44b-dd21-42bd-93d9-f24add3550f4.jpg",
-            "caption": "Launched in 2019",
-            "title": "Monstera",
-            "description": "Our beautiful green house plants bring fresh air and aesthetic vibes."
+            "caption": "",
+            "title": "Client 2",
+            "description": "Dubai, United Arab Emirates",
+            "link": ""
           }
         },
         "slide_3": {
           "type": "slide",
           "settings": {
             "image": "shopify://shop_images/spring-gardening-set-up_925x_9b40bc06-672c-4dc4-a64e-1de730ea5227.jpg",
-            "caption": "Established in 2021",
-            "title": "Gardening Set",
-            "description": "High-quality stainless steel hand tools for professional gardeners."
+            "caption": "",
+            "title": "Client 3",
+            "description": "Dubai, United Arab Emirates",
+            "link": ""
           }
         },
         "slide_4": {
           "type": "slide",
           "settings": {
             "image": "shopify://shop_images/flowers-in-yellow-watering-can_925x_3f76767f-5a01-4eec-ab5d-40210007a9f2.jpg",
-            "caption": "Crafted in 2022",
-            "title": "Watering Can",
-            "description": "Ergonomic designs with long narrow spouts to control water flow."
+            "caption": "",
+            "title": "Client 4",
+            "description": "Dubai, United Arab Emirates",
+            "link": ""
           }
         },
         "slide_5": {
           "type": "slide",
           "settings": {
             "image": "shopify://shop_images/soft-pink-cushioned-armchair-in-stately-salon_925x_05544313-d243-4510-90dc-7f23e311dda8.jpg",
-            "caption": "Designed in 2023",
-            "title": "Salon Interior",
-            "description": "Sleek velvet cushioning and contemporary stately salon lounge setups."
+            "caption": "",
+            "title": "Client 5",
+            "description": "Dubai, United Arab Emirates",
+            "link": ""
           }
         },
         "slide_6": {
           "type": "slide",
           "settings": {
             "image": "shopify://shop_images/house-plant-in-white-pot_925x_3319f44b-dd21-42bd-93d9-f24add3550f4.jpg",
-            "caption": "Grown in 2024",
-            "title": "Potted Plant",
-            "description": "Hand-picked organic soil blends for thriving interior foliage plants."
+            "caption": "",
+            "title": "Client 6",
+            "description": "Dubai, United Arab Emirates",
+            "link": ""
+          }
+        },
+        "slide_QpQJFC": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/befo.png",
+            "caption": "",
+            "title": "Client 7",
+            "description": "Dubai, United Arab Emirates",
+            "link": ""
+          }
+        },
+        "slide_fdwDKb": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/22cddf7a570f99df2517e331ca87c590.png",
+            "caption": "",
+            "title": "Client 8",
+            "description": "Dubai, United Arab Emirates",
+            "link": ""
           }
         }
       },
@@ -129,7 +233,9 @@
         "slide_3",
         "slide_4",
         "slide_5",
-        "slide_6"
+        "slide_6",
+        "slide_QpQJFC",
+        "slide_fdwDKb"
       ],
       "settings": {
         "heading": "Client Stories",
@@ -142,6 +248,7 @@
   "order": [
     "pagetify-page",
     "animated_slider_eF94yr",
+    "rich_text_f7cUjh",
     "arc_slider_766109"
   ]
 }

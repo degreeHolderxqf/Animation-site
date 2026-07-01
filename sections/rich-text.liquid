@@ -21,37 +21,37 @@
         {%- for block in section.blocks -%}
           {%- case block.type -%}
             {%- when 'heading' -%}
-              <h2
-                class="rich-text__heading rte inline-richtext {{ block.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-                {{ block.shopify_attributes }}
-                {% if settings.animations_reveal_on_scroll %}
-                  data-cascade
-                  style="--animation-order: {{ forloop.index }};"
-                {% endif %}
-              >
-                {{ block.settings.heading }}
-              </h2>
+              <div class="custom-reveal-mask">
+                <h2
+                  class="rich-text__heading rte inline-richtext {{ block.settings.heading_size }} custom-reveal-item"
+                  data-aos="fade-up"
+                  data-aos-delay="{{ forloop.index | times: 80 }}"
+                  {{ block.shopify_attributes }}
+                >
+                  {{ block.settings.heading }}
+                </h2>
+              </div>
             {%- when 'caption' -%}
-              <p
-                class="rich-text__caption {{ block.settings.text_style }} {{ block.settings.text_style }}--{{ block.settings.text_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-                {{ block.shopify_attributes }}
-                {% if settings.animations_reveal_on_scroll %}
-                  data-cascade
-                  style="--animation-order: {{ forloop.index }};"
-                {% endif %}
-              >
-                {{ block.settings.caption | escape }}
-              </p>
+              <div class="custom-reveal-mask">
+                <p
+                  class="rich-text__caption {{ block.settings.text_style }} {{ block.settings.text_style }}--{{ block.settings.text_size }} custom-reveal-item"
+                  data-aos="fade-up"
+                  data-aos-delay="{{ forloop.index | times: 80 }}"
+                  {{ block.shopify_attributes }}
+                >
+                  {{ block.settings.caption | escape }}
+                </p>
+              </div>
             {%- when 'text' -%}
-              <div
-                class="rich-text__text rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-                {{ block.shopify_attributes }}
-                {% if settings.animations_reveal_on_scroll %}
-                  data-cascade
-                  style="--animation-order: {{ forloop.index }};"
-                {% endif %}
-              >
-                {{ block.settings.text }}
+              <div class="custom-reveal-mask">
+                <div
+                  class="rich-text__text rte custom-reveal-item"
+                  data-aos="fade-up"
+                  data-aos-delay="{{ forloop.index | times: 80 }}"
+                  {{ block.shopify_attributes }}
+                >
+                  {{ block.settings.text }}
+                </div>
               </div>
             {%- when 'button' -%}
               <div

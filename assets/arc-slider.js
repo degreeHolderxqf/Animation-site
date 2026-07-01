@@ -33,12 +33,20 @@ function initArcSlider(section) {
     const DEG2RAD = Math.PI / 180;
     const wheelSize = radius * 2;
 
-    // Card width and outer screen margins
-    const cardWidth = isMobile ? 180 : 320;
-    const margin = isMobile ? 15 : 40;
+    // Card width
+    const cardWidth = isMobile ? 220 : 434;
 
-    // D is the horizontal distance from center to screen edge minus outer margins
-    const D = (window.innerWidth - cardWidth) / 2 - margin;
+    let D;
+    if (isMobile) {
+      // On mobile, only 1 slide is fully visible, and left/right adjacent slides are exactly 10% visible
+      const visibleWidth = 0.10 * cardWidth;
+      D = window.innerWidth / 2 + (cardWidth / 2 - visibleWidth);
+    } else {
+      // On desktop, create a spacious gap in the middle with left/right cards exactly 60% visible
+      // Center of left card = cardWidth / 2 - 40% * cardWidth = 0.1 * cardWidth
+      // D = screenCenter - Center of left card = window.innerWidth / 2 - 0.1 * cardWidth
+      D = window.innerWidth / 2 - 0.10 * cardWidth;
+    }
 
     // Calculate slice angle dynamically so the side cards sit exactly at the screen edges
     const ratio = Math.max(0, Math.min(0.99, D / radius));
@@ -52,24 +60,26 @@ function initArcSlider(section) {
       top: isMobile ? 150 : 260
     });
 
-    // Place each card around the circular perimeter using negative angles (-i * slice)
-    // This maps dragging to the right to animate to the next slide
+    // Place each card around the circular perimeter using positive angles (i * slice)
+    // This starts with Card 0 centered and other cards extending to the right side
     gsap.set(cards, {
-      x: i => center + radius * Math.sin(-i * slice * DEG2RAD),
-      y: i => center - radius * Math.cos(-i * slice * DEG2RAD),
-      rotation: i => -i * slice,
+      x: i => center + radius * Math.sin(i * slice * DEG2RAD),
+      y: i => center - radius * Math.cos(i * slice * DEG2RAD),
+      rotation: i => i * slice,
       xPercent: -50,
       yPercent: -50
     });
 
     // Set dragging bounds based on slice angles to prevent rotating into empty space
-    // Since cards are positioned at negative angles, rotation goes from 0 to (len - 1)*slice
-    const minRotation = 0;
-    const maxRotation = (cards.length - 1) * slice;
+    // Since cards are positioned at positive angles, target wheel rotation is negative: 0 to -(len - 1)*slice
+    const minRotation = -(cards.length - 1) * slice;
+    const maxRotation = 0;
 
     // Centered start: Rotate wheel to center the second card (index 1) on load so left, middle, right are visible
     if (lastActiveIndex === -1 && cards.length > 1) {
-      gsap.set(wheel, { rotation: slice });
+      gsap.set(wheel, { rotation: -slice });
+    } else if (lastActiveIndex === -1 && cards.length > 0) {
+      gsap.set(wheel, { rotation: 0 });
     }
 
     if (draggableInstance) {
@@ -87,8 +97,8 @@ function initArcSlider(section) {
   function updateActiveCard() {
     const currentRot = gsap.getProperty(wheel, "rotation") || 0;
     
-    // Calculate index from positive rotation values
-    let rawIndex = currentRot / slice;
+    // Calculate index from negative rotation values
+    let rawIndex = -currentRot / slice;
     let activeIndex = Math.round(rawIndex);
     
     // Constraint index to valid blocks
@@ -137,10 +147,25 @@ function initArcSlider(section) {
           }, 250);
         }
       } else {
-        // Initial load (no fade transition needed, elements already have active class)
+        // Initial load: Set content, then trigger slide up animation
         activeCaption.textContent = caption;
         activeTitle.textContent = title;
         activeDescription.textContent = description;
+
+        // Force browser layout repaint and add active class to animate up on load
+        const detailsContainer = activeCaption.closest(".arc-slider__active-details");
+        if (detailsContainer) {
+          detailsContainer.classList.remove("active");
+          detailsContainer.classList.remove("exit");
+          detailsContainer.classList.add("no-transition");
+          detailsContainer.offsetHeight; // force repaint at bottom
+          detailsContainer.classList.remove("no-transition");
+          
+          // Let it animate up on next frame
+          requestAnimationFrame(() => {
+            detailsContainer.classList.add("active");
+          });
+        }
       }
 
       lastActiveIndex = activeIndex;
@@ -153,7 +178,7 @@ function initArcSlider(section) {
     isRotating = true;
 
     const currentRot = gsap.getProperty(wheel, "rotation") || 0;
-    const targetRot = index * slice;
+    const targetRot = -index * slice;
 
     // Calculate shortest path rotation (avoid full-circle spins on wrap around)
     let diff = (targetRot - currentRot) % 360;
@@ -163,7 +188,6 @@ function initArcSlider(section) {
     gsap.to(wheel, {
       rotation: currentRot + diff,
       duration: duration,
-      ease: "power2.out",
       onUpdate: updateActiveCard,
       onComplete: () => {
         isRotating = false;
@@ -186,10 +210,7 @@ function initArcSlider(section) {
         minRotation: minRot,
         maxRotation: maxRot
       },
-      onDrag: () => {
-        isRotating = true;
-        updateActiveCard();
-      },
+      onDrag: updateActiveCard,
       onThrowUpdate: updateActiveCard,
       onDragStart: () => {
         isRotating = true;
