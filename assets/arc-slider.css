@@ -1,0 +1,282 @@
+/* Arc Slider Section Styles */
+
+.arc-slider-section {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background-color: #fbf9f6; /* Warm off-white background matching the reference */
+  color: #2b2b2b;
+  padding: 8rem 0 6rem;
+  box-sizing: border-box;
+}
+
+.arc-slider__header {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 4rem;
+  padding: 0 2rem;
+}
+
+.arc-slider__heading {
+  margin: 0 0 1.5rem;
+  font-size: 3.8rem;
+  font-weight: 400;
+  letter-spacing: -0.5px;
+  color: #121212;
+}
+
+.arc-slider__subheading {
+  margin: 0;
+  font-size: 1.6rem;
+  line-height: 1.6;
+  color: #666666;
+}
+
+.arc-slider__container {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Viewport for slider cards */
+.arc-slider__viewport {
+  position: relative;
+  width: 100%;
+  height: 680px;
+  overflow: hidden;
+  cursor: grab;
+}
+
+.arc-slider__viewport:active {
+  cursor: grabbing;
+}
+
+/* Custom Blend Mode Mouse Follower with Arrows */
+.arc-slider__cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  z-index: 1000;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #000000;
+  will-change: transform, opacity;
+  transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.25s ease;
+}
+
+.arc-slider__cursor svg {
+  display: block;
+  width: 14px;
+  height: 14px;
+  stroke: #000000;
+}
+
+/* Show custom follower only when hovering the viewport area */
+.arc-slider__viewport:hover ~ .arc-slider__cursor,
+.arc-slider__viewport:hover .arc-slider__cursor,
+.arc-slider__container:hover .arc-slider__cursor {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* The wheel centering wrapper */
+.arc-slider__wheel-wrapper {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  width: 2000px;
+  height: 2000px;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* The wheel container rotated via GSAP */
+.arc-slider__wheel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  transform-origin: 50% 50%;
+  pointer-events: auto;
+  will-change: transform;
+}
+
+/* Cards positioned along the arc - Portrait Ratio (3:4.5) */
+.arc-slider__card {
+  position: absolute;
+  width: 320px; /* Premium portrait width */
+  height: 460px; /* Premium portrait height */
+  transform-origin: 50% 50%;
+  user-select: none;
+  -webkit-user-select: none;
+  /* Transitions only opacity when active class toggles */
+  transition: opacity 0.4s ease; 
+  opacity: 0.85; /* Left/Right images are 85% visible by default */
+  visibility: visible;
+  pointer-events: auto;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Centered active card state */
+.arc-slider__card.is-active {
+  opacity: 1;
+  z-index: 10;
+}
+
+.arc-slider__card-media {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+  background-color: #f0ede8;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
+}
+
+.arc-slider__card.is-active .arc-slider__card-media {
+  transform: scale(1.05); /* Soft scale focus */
+}
+
+.arc-slider__card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  display: block;
+}
+
+.arc-slider__active-details {
+  position: absolute;
+  top: 530px; /* Exactly 40px below the center card bottom (30px top + 460px height + 40px) */
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 2rem;
+  max-width: 500px;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.arc-slider__active-caption {
+  margin: 0;
+  font-size: 1.4rem;
+  color: #121212;
+  font-weight: 500;
+  opacity: 0.8;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.arc-slider__active-title {
+  margin: 0.8rem 0 1.2rem;
+  font-size: 3.2rem;
+  font-weight: 400;
+  color: #121212;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  letter-spacing: -0.5px;
+}
+
+.arc-slider__active-description {
+  margin: 0;
+  font-size: 1.5rem;
+  line-height: 1.6;
+  color: #666666;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  max-width: 420px;
+}
+
+/* Nav arrows section */
+.arc-slider__nav {
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  margin-top: 2rem;
+}
+
+.arc-slider__nav-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid #dcdad4;
+  background-color: transparent;
+  color: #121212;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  padding: 0;
+}
+
+.arc-slider__nav-btn svg {
+  transition: transform 0.3s ease;
+}
+
+.arc-slider__nav-btn:hover {
+  background-color: #121212;
+  border-color: #121212;
+  color: #ffffff;
+}
+
+.arc-slider__nav-btn--prev:hover svg {
+  transform: translateX(-3px);
+}
+
+.arc-slider__nav-btn--next:hover svg {
+  transform: translateX(3px);
+}
+
+/* Mobile Responsiveness */
+@media screen and (max-width: 749px) {
+  .arc-slider-section {
+    padding: 6rem 0 4rem;
+  }
+  
+  .arc-slider__heading {
+    font-size: 2.8rem;
+  }
+
+  .arc-slider__viewport {
+    height: 420px;
+  }
+
+  .arc-slider__card {
+    width: 180px;
+    height: 260px;
+  }
+
+  .arc-slider__active-details {
+    top: 300px; /* 15px top + 260px height + 25px = 300px */
+    min-height: 100px;
+  }
+
+  .arc-slider__active-title {
+    font-size: 2.4rem;
+    margin: 0.6rem 0 0.8rem;
+  }
+
+  .arc-slider__active-description {
+    font-size: 1.3rem;
+  }
+
+  .arc-slider__nav-btn {
+    width: 44px;
+    height: 44px;
+  }
+}
