@@ -113,19 +113,19 @@
 }
 
 .arc-slider__card {
-  position: absolute;
-  width: 400px;
-  height: 550px;
-  transform-origin: 50% 50%;
-  user-select: none;
-  -webkit-user-select: none;
-  transition: opacity .4s ease;
-  opacity: .85;
-  visibility: visible;
-  pointer-events: auto;
-  will-change: transform, opacity;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
+    position: absolute;
+    max-width: 414px;
+    transform-origin: 50% 50%;
+    user-select: none;
+    -webkit-user-select: none;
+    transition: opacity .4s ease;
+    opacity: .85;
+    visibility: visible;
+    pointer-events: auto;
+    will-change: transform,opacity;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    aspect-ratio: 3/4;
 }
 
 /* Centered active card state */
@@ -137,16 +137,13 @@
 .arc-slider__card-media {
   width: 100%;
   height: 100%;
-  overflow: hidden;
-  border-radius: 12px;
-  background-color: #f0ede8;
+  overflow: hidden;  
   transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
 }
 
-.arc-slider__card.is-active .arc-slider__card-media {
-  transform: scale(1.05);
-  /* Soft scale focus */
-}
+/* .arc-slider__card.is-active .arc-slider__card-media {
+  transform: scale(1.05); 
+} */
 
 .arc-slider__card img {
   width: 100%;
@@ -158,7 +155,7 @@
 
 .arc-slider__active-details {
   position: absolute;
-  top: 590px;
+  top: 580px;
   /* Exactly 45px below the center card bottom (260px top + 310px height + 45px) */
   left: 50%;
   transform: translateX(-50%);
@@ -247,7 +244,7 @@
 /* Mobile Responsiveness */
 @media screen and (max-width: 749px) {
   .arc-slider-section {
-    padding: 6rem 0 4rem;
+    padding: 3.5rem 0 4rem;
   }
 
   .arc-slider__heading {
@@ -255,27 +252,32 @@
   }
 
   .arc-slider__viewport {
-    height: 420px;
+    height: 450px;
   }
 
   .arc-slider__card {
-    width: 220px;
-    height: 260px;
-  }
+    width: 232px;
+    height: 331px;
+}
 
   .arc-slider__active-details {
-    top: 300px;
-    /* 15px top + 260px height + 25px = 300px */
+    top: 350px; 
     min-height: 100px;
   }
 
-  .arc-slider__active-title {
-    font-size: 2.4rem;
-    margin: 0.6rem 0 0.8rem;
+    .arc-slider__active-title {
+    font-weight: 500;
+    font-size: 24px; 
+    line-height: 40px;
+    letter-spacing: -1px; 
+    margin: 0;
   }
 
-  .arc-slider__active-description {
-    font-size: 1.3rem;
+  .arc-slider__active-description { 
+    font-weight: 500;
+    font-size: 16px; 
+    line-height: 22px; 
+
   }
 
   .arc-slider__nav-btn {
@@ -320,4 +322,15 @@
 .no-transition,
 .no-transition .custom-reveal-item {
   transition: none !important;
+}
+
+
+@media screen and (min-width: 750px) and (max-width: 989px) {
+ .arc-slider__card {
+    max-width: 330px; 
+}
+
+.arc-slider__active-details {
+   top: 530px;
+}
 }

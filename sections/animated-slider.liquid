@@ -1,5 +1,5 @@
 {% comment %} Animated Slider Section
-  - Supports blocks of type "slide" with image, title, text, thumbnail
+  - Supports blocks of type "slide" with image, title, text, mobile image
   - Includes accessible markup and data attributes for JS
 {% endcomment %}
 
@@ -16,30 +16,64 @@
         <div class="swiper-wrapper">
           {% for block in section.blocks %}
             {% if block.type == 'slide' %}
-              <div class="swiper-slide animated-slider__slide" data-index="{{ forloop.index0 }}" data-thumb-src="{{ block.settings.thumbnail | img_url: '200x' }}" data-image-src="{{ block.settings.image | img_url: '2048x' }}">
+              <div class="swiper-slide animated-slider__slide" data-index="{{ forloop.index0 }}" data-thumb-src="{{ block.settings.image | img_url: '200x' }}" data-image-src="{{ block.settings.image | img_url: '2048x' }}">
                 <div class="slide-under">
                   {% if block.settings.slide_link != blank %}
                     <a href="{{ block.settings.slide_link }}">
-                      <img src="{{ block.settings.image | img_url: '2048x' }}" alt="{{ block.settings.image_alt }}">
+                      <picture>
+                        {% if block.settings.mobile_image != blank %}
+                          <source media="(max-width: 750px)" srcset="{{ block.settings.mobile_image | img_url: '1024x' }}">
+                        {% endif %}
+                        <img src="{{ block.settings.image | img_url: '2048x' }}" alt="{{ block.settings.image_alt }}">
+                      </picture>
                     </a>
                   {% else %}
-                    <img src="{{ block.settings.image | img_url: '2048x' }}" alt="{{ block.settings.image_alt }}">
+                    <picture>
+                      {% if block.settings.mobile_image != blank %}
+                        <source media="(max-width: 750px)" srcset="{{ block.settings.mobile_image | img_url: '1024x' }}">
+                      {% endif %}
+                      <img src="{{ block.settings.image | img_url: '2048x' }}" alt="{{ block.settings.image_alt }}">
+                    </picture>
                   {% endif %}
                 </div>
 
                 <div class="split top">
                   {% if block.settings.slide_link != blank %}
-                    <a href="{{ block.settings.slide_link }}"><img src="{{ block.settings.image | img_url: '2048x' }}" alt="{{ block.settings.image_alt }}"></a>
+                    <a href="{{ block.settings.slide_link }}">
+                      <picture>
+                        {% if block.settings.mobile_image != blank %}
+                          <source media="(max-width: 750px)" srcset="{{ block.settings.mobile_image | img_url: '1024x' }}">
+                        {% endif %}
+                        <img src="{{ block.settings.image | img_url: '2048x' }}" alt="{{ block.settings.image_alt }}">
+                      </picture>
+                    </a>
                   {% else %}
-                    <img src="{{ block.settings.image | img_url: '2048x' }}" alt="{{ block.settings.image_alt }}">
+                    <picture>
+                      {% if block.settings.mobile_image != blank %}
+                        <source media="(max-width: 750px)" srcset="{{ block.settings.mobile_image | img_url: '1024x' }}">
+                      {% endif %}
+                      <img src="{{ block.settings.image | img_url: '2048x' }}" alt="{{ block.settings.image_alt }}">
+                    </picture>
                   {% endif %}
                 </div>
 
                 <div class="split bottom">
                   {% if block.settings.slide_link != blank %}
-                    <a href="{{ block.settings.slide_link }}"><img src="{{ block.settings.image | img_url: '2048x' }}" alt="{{ block.settings.image_alt }}"></a>
+                    <a href="{{ block.settings.slide_link }}">
+                      <picture>
+                        {% if block.settings.mobile_image != blank %}
+                          <source media="(max-width: 750px)" srcset="{{ block.settings.mobile_image | img_url: '1024x' }}">
+                        {% endif %}
+                        <img src="{{ block.settings.image | img_url: '2048x' }}" alt="{{ block.settings.image_alt }}">
+                      </picture>
+                    </a>
                   {% else %}
-                    <img src="{{ block.settings.image | img_url: '2048x' }}" alt="{{ block.settings.image_alt }}">
+                    <picture>
+                      {% if block.settings.mobile_image != blank %}
+                        <source media="(max-width: 750px)" srcset="{{ block.settings.mobile_image | img_url: '1024x' }}">
+                      {% endif %}
+                      <img src="{{ block.settings.image | img_url: '2048x' }}" alt="{{ block.settings.image_alt }}">
+                    </picture>
                   {% endif %}
                 </div>
 
@@ -65,7 +99,7 @@
               {%- assign next_slide_index = 0 -%}
             {%- endif -%}
             {%- assign next_block = slide_blocks[next_slide_index] -%}
-            <img class="autoplay-progress__img" src="{{ next_block.settings.thumbnail | img_url: '200x' }}" alt="Next slide thumbnail">
+            <img class="autoplay-progress__img" src="{{ next_block.settings.image | img_url: '200x' }}" alt="Next slide thumbnail">
             <span class="autoplay-progress__label">Next</span>
           </div>
         </button>
@@ -118,10 +152,10 @@
       "type": "slide",
       "name": "Slide",
       "settings": [
-        {"type":"image_picker","id":"image","label":"Image"},
+        {"type":"image_picker","id":"image","label":"Image (Desktop)"},
+        {"type":"image_picker","id":"mobile_image","label":"Image (Mobile)"},
         {"type":"text","id":"image_alt","label":"Image alt text","default":"slide"},
         {"type":"text","id":"caption","label":"Caption","default":"slide image"},
-        {"type":"image_picker","id":"thumbnail","label":"Thumbnail (small image)"},
         {"type":"url","id":"slide_link","label":"Link (optional)"}
       ]
     }
