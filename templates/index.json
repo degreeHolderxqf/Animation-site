@@ -26,27 +26,24 @@
             "image": "shopify://shop_images/3255738d8e0a4f8b807a5a6235350d3b78539454.jpg",
             "image_alt": "slide",
             "caption": "slide image",
-            "thumbnail": "shopify://shop_images/3255738d8e0a4f8b807a5a6235350d3b78539454.jpg",
-            "slide_link": ""
-          }
-        },
-        "slide_UrrKNE": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/flowers-in-yellow-watering-can_925x_3f76767f-5a01-4eec-ab5d-40210007a9f2.jpg",
-            "image_alt": "slide",
-            "caption": "slide image",
-            "thumbnail": "shopify://shop_images/flowers-in-yellow-watering-can_925x_3f76767f-5a01-4eec-ab5d-40210007a9f2.jpg",
             "slide_link": ""
           }
         },
         "slide_xCLae7": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/3255738d8e0a4f8b807a5a6235350d3b78539454.jpg",
+            "image": "shopify://shop_images/a72f2252a93e957af57b10b73de0d286f330f4d0.jpg",
             "image_alt": "slide",
             "caption": "slide image",
-            "thumbnail": "shopify://shop_images/3255738d8e0a4f8b807a5a6235350d3b78539454.jpg",
+            "slide_link": ""
+          }
+        },
+        "slide_UrrKNE": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/condominium-interior-livingroom_925x_2745439a-065f-4531-af0b-17043d5693bf.jpg",
+            "image_alt": "slide",
+            "caption": "slide image",
             "slide_link": ""
           }
         },
@@ -56,7 +53,6 @@
             "image": "shopify://shop_images/flowers-in-yellow-watering-can_925x_3f76767f-5a01-4eec-ab5d-40210007a9f2.jpg",
             "image_alt": "slide",
             "caption": "slide image",
-            "thumbnail": "shopify://shop_images/flowers-in-yellow-watering-can_925x_3f76767f-5a01-4eec-ab5d-40210007a9f2.jpg",
             "slide_link": ""
           }
         },
@@ -67,7 +63,6 @@
             "image": "shopify://shop_images/soft-pink-cushioned-armchair-in-stately-salon_925x_05544313-d243-4510-90dc-7f23e311dda8.jpg",
             "image_alt": "slide",
             "caption": "slide image",
-            "thumbnail": "shopify://shop_images/soft-pink-cushioned-armchair-in-stately-salon_925x_05544313-d243-4510-90dc-7f23e311dda8.jpg",
             "slide_link": ""
           }
         },
@@ -78,7 +73,6 @@
             "image": "shopify://shop_images/bright-hotel-room-bed_925x_1a2f6ba6-2900-40aa-b573-9d96b39aa047.jpg",
             "image_alt": "slide",
             "caption": "slide image",
-            "thumbnail": "shopify://shop_images/bright-hotel-room-bed_925x_1a2f6ba6-2900-40aa-b573-9d96b39aa047.jpg",
             "slide_link": ""
           }
         },
@@ -89,15 +83,14 @@
             "image": "shopify://shop_images/spring-gardening-set-up_925x_9b40bc06-672c-4dc4-a64e-1de730ea5227.jpg",
             "image_alt": "slide",
             "caption": "slide image",
-            "thumbnail": "shopify://shop_images/spring-gardening-set-up_925x_9b40bc06-672c-4dc4-a64e-1de730ea5227.jpg",
             "slide_link": ""
           }
         }
       },
       "block_order": [
         "slide_FEJAB3",
-        "slide_UrrKNE",
         "slide_xCLae7",
+        "slide_UrrKNE",
         "slide_gNkERh",
         "slide_mnN4Fd",
         "slide_D4YwaC",
