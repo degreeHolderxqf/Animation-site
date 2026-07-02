@@ -4,14 +4,16 @@
  */
 
 function initArcSlider(section) {
+  if (section.dataset.initialized) return;
+  section.dataset.initialized = 'true';
+
   const wheelWrapper = section.querySelector(".arc-slider__wheel-wrapper");
   const wheel = section.querySelector(".arc-slider__wheel");
   const cards = gsap.utils.toArray(".arc-slider__card", section);
-  
+
   if (!wheelWrapper || !wheel || cards.length === 0) return;
 
-  const prevBtn = section.querySelector(".arc-slider__nav-btn--prev");
-  const nextBtn = section.querySelector(".arc-slider__nav-btn--next");
+
   const activeCaption = section.querySelector(".arc-slider__active-caption");
   const activeTitle = section.querySelector(".arc-slider__active-title");
   const activeDescription = section.querySelector(".arc-slider__active-description");
@@ -19,7 +21,7 @@ function initArcSlider(section) {
 
   const desktopRadius = parseInt(section.dataset.desktopRadius) || 3000;
   const mobileRadius = parseInt(section.dataset.mobileRadius) || 1200;
-  
+
   let slice = 10; // Dynamically computed spacing angle
   let isRotating = false;
   let lastActiveIndex = -1;
@@ -96,11 +98,11 @@ function initArcSlider(section) {
   // 2. Identify the active (centered) card and update UI states
   function updateActiveCard() {
     const currentRot = gsap.getProperty(wheel, "rotation") || 0;
-    
+
     // Calculate index from negative rotation values
     let rawIndex = -currentRot / slice;
     let activeIndex = Math.round(rawIndex);
-    
+
     // Constraint index to valid blocks
     activeIndex = Math.max(0, Math.min(cards.length - 1, activeIndex));
 
@@ -115,7 +117,7 @@ function initArcSlider(section) {
 
     if (lastActiveIndex !== activeIndex) {
       const activeCard = cards[activeIndex];
-      
+
       // Animate transition of active slide text details
       const title = activeCard.dataset.title || "";
       const caption = activeCard.dataset.caption || "";
@@ -160,7 +162,7 @@ function initArcSlider(section) {
           detailsContainer.classList.add("no-transition");
           detailsContainer.offsetHeight; // force repaint at bottom
           detailsContainer.classList.remove("no-transition");
-          
+
           // Let it animate up on next frame
           requestAnimationFrame(() => {
             detailsContainer.classList.add("active");
@@ -201,7 +203,7 @@ function initArcSlider(section) {
   // 4. Initialize Draggable with snapping and bounds
   function initDraggable(minRot, maxRot) {
     const hasInertia = typeof InertiaPlugin !== 'undefined';
-    
+
     draggableInstance = Draggable.create(wheel, {
       type: "rotation",
       inertia: hasInertia,
@@ -231,21 +233,7 @@ function initArcSlider(section) {
   function initEvents() {
     window.addEventListener("resize", setup);
 
-    if (prevBtn) {
-      prevBtn.addEventListener("click", () => {
-        let targetIndex = lastActiveIndex - 1;
-        if (targetIndex < 0) targetIndex = cards.length - 1;
-        rotateToCard(targetIndex);
-      });
-    }
 
-    if (nextBtn) {
-      nextBtn.addEventListener("click", () => {
-        let targetIndex = lastActiveIndex + 1;
-        if (targetIndex >= cards.length) targetIndex = 0;
-        rotateToCard(targetIndex);
-      });
-    }
 
     cards.forEach(card => {
       card.addEventListener("click", (e) => {
@@ -274,7 +262,7 @@ function initArcSlider(section) {
     // Custom follow cursor logic
     if (cursor) {
       const container = section.querySelector(".arc-slider__container");
-      
+
       container.addEventListener("mousemove", (e) => {
         gsap.to(cursor, {
           x: e.clientX,
@@ -299,18 +287,48 @@ function initArcSlider(section) {
   setup();
   updateActiveCard();
   initEvents();
+
+  section._cleanupArcSlider = function () {
+    window.removeEventListener("resize", setup);
+    if (draggableInstance) {
+      draggableInstance.kill();
+    }
+    delete section.dataset.initialized;
+  };
 }
 
 // Wait for libraries to load before initializing sliders
 function initWhenReady() {
   if (typeof gsap !== 'undefined' && typeof Draggable !== 'undefined' && typeof InertiaPlugin !== 'undefined') {
     gsap.registerPlugin(Draggable, InertiaPlugin);
-    
-    const sections = document.querySelectorAll(".arc-slider-section");
-    sections.forEach(initArcSlider);
+
+    const initAll = () => {
+      const sections = document.querySelectorAll(".arc-slider-section");
+      sections.forEach(initArcSlider);
+    };
+
+    if (document.readyState === 'interactive' || document.readyState === 'complete') {
+      initAll();
+    } else {
+      document.addEventListener("DOMContentLoaded", initAll);
+    }
   } else {
     setTimeout(initWhenReady, 50);
   }
 }
 
 initWhenReady();
+
+document.addEventListener("shopify:section:load", (event) => {
+  const arcSlider = event.target.querySelector(".arc-slider-section") || (event.target.classList.contains("arc-slider-section") ? event.target : null);
+  if (arcSlider) {
+    initArcSlider(arcSlider);
+  }
+});
+
+document.addEventListener("shopify:section:unload", (event) => {
+  const arcSlider = event.target.querySelector(".arc-slider-section") || (event.target.classList.contains("arc-slider-section") ? event.target : null);
+  if (arcSlider && typeof arcSlider._cleanupArcSlider === "function") {
+    arcSlider._cleanupArcSlider();
+  }
+});

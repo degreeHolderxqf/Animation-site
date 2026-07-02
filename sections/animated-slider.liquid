@@ -16,23 +16,31 @@
         <div class="swiper-wrapper">
           {% for block in section.blocks %}
             {% if block.type == 'slide' %}
-              <div class="swiper-slide animated-slider__slide" data-index="{{ forloop.index0 }}" data-thumb-src="{{ block.settings.image | img_url: '200x' }}" data-image-src="{{ block.settings.image | img_url: '2048x' }}">
+              {%- assign img_alt = block.settings.image.alt | default: block.settings.image_alt | escape -%}
+              {%- assign img_width = block.settings.image.width | default: 2048 -%}
+              {%- assign img_height = block.settings.image.height | default: 1365 -%}
+              {%- assign loading_strategy = 'lazy' -%}
+              {%- if forloop.first -%}
+                {%- assign loading_strategy = 'eager' -%}
+              {%- endif -%}
+
+              <div class="swiper-slide animated-slider__slide" data-index="{{ forloop.index0 }}" data-thumb-src="{{ block.settings.image | image_url: width: 200 }}" data-image-src="{{ block.settings.image | image_url: width: 2048 }}">
                 <div class="slide-under">
                   {% if block.settings.slide_link != blank %}
                     <a href="{{ block.settings.slide_link }}">
                       <picture>
                         {% if block.settings.mobile_image != blank %}
-                          <source media="(max-width: 750px)" srcset="{{ block.settings.mobile_image | img_url: '1024x' }}">
+                          <source media="(max-width: 750px)" srcset="{{ block.settings.mobile_image | image_url: width: 1024 }}">
                         {% endif %}
-                        <img src="{{ block.settings.image | img_url: '2048x' }}" alt="{{ block.settings.image_alt }}">
+                        <img src="{{ block.settings.image | image_url: width: 2048 }}" alt="{{ img_alt }}" width="{{ img_width }}" height="{{ img_height }}" loading="{{ loading_strategy }}">
                       </picture>
                     </a>
                   {% else %}
                     <picture>
                       {% if block.settings.mobile_image != blank %}
-                        <source media="(max-width: 750px)" srcset="{{ block.settings.mobile_image | img_url: '1024x' }}">
+                        <source media="(max-width: 750px)" srcset="{{ block.settings.mobile_image | image_url: width: 1024 }}">
                       {% endif %}
-                      <img src="{{ block.settings.image | img_url: '2048x' }}" alt="{{ block.settings.image_alt }}">
+                      <img src="{{ block.settings.image | image_url: width: 2048 }}" alt="{{ img_alt }}" width="{{ img_width }}" height="{{ img_height }}" loading="{{ loading_strategy }}">
                     </picture>
                   {% endif %}
                 </div>
@@ -42,17 +50,17 @@
                     <a href="{{ block.settings.slide_link }}">
                       <picture>
                         {% if block.settings.mobile_image != blank %}
-                          <source media="(max-width: 750px)" srcset="{{ block.settings.mobile_image | img_url: '1024x' }}">
+                          <source media="(max-width: 750px)" srcset="{{ block.settings.mobile_image | image_url: width: 1024 }}">
                         {% endif %}
-                        <img src="{{ block.settings.image | img_url: '2048x' }}" alt="{{ block.settings.image_alt }}">
+                        <img src="{{ block.settings.image | image_url: width: 2048 }}" alt="{{ img_alt }}" width="{{ img_width }}" height="{{ img_height }}" loading="{{ loading_strategy }}">
                       </picture>
                     </a>
                   {% else %}
                     <picture>
                       {% if block.settings.mobile_image != blank %}
-                        <source media="(max-width: 750px)" srcset="{{ block.settings.mobile_image | img_url: '1024x' }}">
+                        <source media="(max-width: 750px)" srcset="{{ block.settings.mobile_image | image_url: width: 1024 }}">
                       {% endif %}
-                      <img src="{{ block.settings.image | img_url: '2048x' }}" alt="{{ block.settings.image_alt }}">
+                      <img src="{{ block.settings.image | image_url: width: 2048 }}" alt="{{ img_alt }}" width="{{ img_width }}" height="{{ img_height }}" loading="{{ loading_strategy }}">
                     </picture>
                   {% endif %}
                 </div>
@@ -62,17 +70,17 @@
                     <a href="{{ block.settings.slide_link }}">
                       <picture>
                         {% if block.settings.mobile_image != blank %}
-                          <source media="(max-width: 750px)" srcset="{{ block.settings.mobile_image | img_url: '1024x' }}">
+                          <source media="(max-width: 750px)" srcset="{{ block.settings.mobile_image | image_url: width: 1024 }}">
                         {% endif %}
-                        <img src="{{ block.settings.image | img_url: '2048x' }}" alt="{{ block.settings.image_alt }}">
+                        <img src="{{ block.settings.image | image_url: width: 2048 }}" alt="{{ img_alt }}" width="{{ img_width }}" height="{{ img_height }}" loading="{{ loading_strategy }}">
                       </picture>
                     </a>
                   {% else %}
                     <picture>
                       {% if block.settings.mobile_image != blank %}
-                        <source media="(max-width: 750px)" srcset="{{ block.settings.mobile_image | img_url: '1024x' }}">
+                        <source media="(max-width: 750px)" srcset="{{ block.settings.mobile_image | image_url: width: 1024 }}">
                       {% endif %}
-                      <img src="{{ block.settings.image | img_url: '2048x' }}" alt="{{ block.settings.image_alt }}">
+                      <img src="{{ block.settings.image | image_url: width: 2048 }}" alt="{{ img_alt }}" width="{{ img_width }}" height="{{ img_height }}" loading="{{ loading_strategy }}">
                     </picture>
                   {% endif %}
                 </div>
@@ -99,7 +107,9 @@
               {%- assign next_slide_index = 0 -%}
             {%- endif -%}
             {%- assign next_block = slide_blocks[next_slide_index] -%}
-            <img class="autoplay-progress__img" src="{{ next_block.settings.image | img_url: '200x' }}" alt="Next slide thumbnail">
+            {%- if next_block.settings.image != blank -%}
+              <img class="autoplay-progress__img" src="{{ next_block.settings.image | image_url: width: 200 }}" alt="{{ next_block.settings.image.alt | default: 'Next slide thumbnail' | escape }}" width="80" height="80" loading="lazy">
+            {%- endif -%}
             <span class="autoplay-progress__label">Next</span>
           </div>
         </button>
@@ -114,7 +124,7 @@
   </div>
 
   {{ 'animated-slider.css' | asset_url | stylesheet_tag }}
-  {{ 'animated-slider.js' | asset_url | script_tag }}
+  <script src="{{ 'animated-slider.js' | asset_url }}" defer="defer"></script>
 
 {% schema %}
 {

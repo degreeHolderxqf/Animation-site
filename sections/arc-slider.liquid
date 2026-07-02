@@ -6,6 +6,8 @@
 {% endcomment %}
 
 <div class="arc-slider-section section-{{ section.id }}-padding" id="ArcSlider-{{ section.id }}" data-desktop-radius="{{ section.settings.desktop_radius }}" data-mobile-radius="{{ section.settings.mobile_radius }}">
+
+
   <div class="arc-slider__container">
     <!-- Custom blend-mode cursor following overlay with navigation chevrons -->
     <div class="arc-slider__cursor">
@@ -32,8 +34,8 @@
                    data-link="{{ block.settings.link | default: '#' }}"
                    {{ block.shopify_attributes }}>
                 <div class="arc-slider__card-media">
-                  <img src="{{ block.settings.image | img_url: '800x1200', crop: 'center' }}" 
-                       alt="{{ block.settings.title | escape }}" 
+                  <img src="{{ block.settings.image | image_url: width: 800, height: 1200, crop: 'center' }}" 
+                       alt="{{ block.settings.image.alt | default: block.settings.title | escape }}" 
                        loading="lazy" 
                        width="400" 
                        height="600">
@@ -84,18 +86,6 @@
 {
   "name": "Arc Shape Wheel Slider",
   "settings": [
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "Client Stories"
-    },
-    {
-      "type": "textarea",
-      "id": "subheading",
-      "label": "Subheading",
-      "default": "Explore our collection of award-winning projects around the globe."
-    },
     {
       "type": "number",
       "id": "desktop_radius",

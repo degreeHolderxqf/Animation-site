@@ -113,19 +113,19 @@
 }
 
 .arc-slider__card {
-    position: absolute;
-    max-width: 414px;
-    transform-origin: 50% 50%;
-    user-select: none;
-    -webkit-user-select: none;
-    transition: opacity .4s ease;
-    opacity: .85;
-    visibility: visible;
-    pointer-events: auto;
-    will-change: transform,opacity;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    aspect-ratio: 3/4;
+  position: absolute;
+  max-width: 414px;
+  transform-origin: 50% 50%;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: opacity .4s ease;
+  opacity: .85;
+  visibility: visible;
+  pointer-events: auto;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  aspect-ratio: 3/4;
 }
 
 /* Centered active card state */
@@ -137,7 +137,7 @@
 .arc-slider__card-media {
   width: 100%;
   height: 100%;
-  overflow: hidden;  
+  overflow: hidden;
   transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
 }
 
@@ -200,46 +200,6 @@
   text-align: center;
 }
 
-/* Nav arrows section */
-.arc-slider__nav {
-  display: flex;
-  justify-content: center;
-  gap: 2.5rem;
-  margin-top: 2rem;
-}
-
-.arc-slider__nav-btn {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  border: 1px solid #dcdad4;
-  background-color: transparent;
-  color: #121212;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-  padding: 0;
-}
-
-.arc-slider__nav-btn svg {
-  transition: transform 0.3s ease;
-}
-
-.arc-slider__nav-btn:hover {
-  background-color: #121212;
-  border-color: #121212;
-  color: #ffffff;
-}
-
-.arc-slider__nav-btn--prev:hover svg {
-  transform: translateX(-3px);
-}
-
-.arc-slider__nav-btn--next:hover svg {
-  transform: translateX(3px);
-}
 
 /* Mobile Responsiveness */
 @media screen and (max-width: 749px) {
@@ -258,26 +218,26 @@
   .arc-slider__card {
     width: 232px;
     height: 331px;
-}
+  }
 
   .arc-slider__active-details {
-    top: 350px; 
+    top: 350px;
     min-height: 100px;
   }
 
-    .arc-slider__active-title {
+  .arc-slider__active-title {
     font-weight: 500;
-    font-size: 24px; 
+    font-size: 24px;
     line-height: 40px;
-    letter-spacing: -1px; 
+    letter-spacing: -1px;
     margin: 0;
   }
 
-  .arc-slider__active-description { 
+  .arc-slider__active-description {
     font-weight: 500;
-    font-size: 16px; 
-    line-height: 22px; 
-
+    font-size: 16px;
+    line-height: 22px;
+    min-width: 260px;
   }
 
   .arc-slider__nav-btn {
@@ -326,11 +286,11 @@
 
 
 @media screen and (min-width: 750px) and (max-width: 989px) {
- .arc-slider__card {
-    max-width: 330px; 
-}
+  .arc-slider__card {
+    max-width: 295px;
+  }
 
-.arc-slider__active-details {
-   top: 530px;
-}
+  .arc-slider__active-details {
+    top: 530px;
+  }
 }
